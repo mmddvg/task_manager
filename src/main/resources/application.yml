@@ -1,0 +1,23 @@
+spring :
+  application :
+    name : taskmanager
+
+  datasource :
+    url : jdbc:postgresql://localhost:5432/taskmanager
+    username : user
+    password : password
+    driver-class-name : org.postgresql.Driver
+
+  jpa :
+    hibernate:
+      ddl-auto : create
+    show-sql : true
+    properties :
+      hibernate :
+        format-sql : true
+    database : POSTGRESQL
+#    database-platform : org.hibernate.dialect.PostgreSQLDialect
+
+#    driver-class-name : com.postgres.cj.jdbc.Driver
+
+name : blah
