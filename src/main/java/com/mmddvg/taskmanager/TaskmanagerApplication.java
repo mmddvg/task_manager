@@ -15,13 +15,7 @@ import java.util.Arrays;
 public class TaskmanagerApplication {
 
 	public static void main(String[] args) {
-		var ctx = SpringApplication.run(TaskmanagerApplication.class, args);
-
-
-		var b = ctx.getBean(TmpService.class);
-
-
-		System.out.println(b.tell());
+		 SpringApplication.run(TaskmanagerApplication.class, args);
 
 	}
 
