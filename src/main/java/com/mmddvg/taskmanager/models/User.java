@@ -2,15 +2,19 @@ package com.mmddvg.taskmanager.models;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mmddvg.taskmanager.dto.NewUser;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,6 +34,42 @@ public class User {
 
     @ManyToMany(mappedBy = "members")
     private Set<Team> teams;
+
+    public User(NewUser tmp,String password){
+        this.name = tmp.name();
+        this.email = tmp.email();
+        this.password = password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     public String getPassword() {
         return password;

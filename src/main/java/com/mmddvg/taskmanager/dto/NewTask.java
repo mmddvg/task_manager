@@ -1,5 +1,15 @@
 package com.mmddvg.taskmanager.dto;
 
-public record NewTask(String name,int project_id) {
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
+
+public record NewTask(
+        @NotEmpty
+        String name,
+        @Positive
+        int project_id,
+        String description
+) {
 
 }

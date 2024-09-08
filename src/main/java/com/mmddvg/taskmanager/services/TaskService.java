@@ -17,9 +17,9 @@ public class TaskService {
     TaskRepo taskRepo;
 
 
-//    public Task Create(NewTask arg){
-//        return taskRepo.save( new Task(arg.name(),arg.project_id()));
-//    }
+    public Task Create(NewTask arg){
+        return taskRepo.save(new Task(arg));
+    }
 
     public Task GetOne(Integer id){
         return taskRepo.findById(id).orElse(null);

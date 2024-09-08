@@ -3,6 +3,7 @@ package com.mmddvg.taskmanager.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Time;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class Comment {
     @JsonManagedReference
     private Set<Comment> replies;
 
+    @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Time createdAt;
 

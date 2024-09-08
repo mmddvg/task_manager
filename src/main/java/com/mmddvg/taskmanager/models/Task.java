@@ -3,6 +3,7 @@ package com.mmddvg.taskmanager.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mmddvg.taskmanager.dto.NewTask;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -36,6 +37,13 @@ public class Task {
     public Task() {
     }
 
+    public Task(NewTask arg){
+        this.name = arg.name();
+        this.description = arg.description();
+        var tmp = new Project();
+        tmp.setId(arg.project_id());
+        this.project = tmp;
+    }
     public Set<SubTask> getSubtasks() {
         return subtasks;
     }

@@ -20,4 +20,8 @@ spring :
 
 #    driver-class-name : com.postgres.cj.jdbc.Driver
 
-name : blah
+security :
+  jwt :
+    secret-key : olv9XwqGTgZEYBcpjrmu0+jOppT107l5MkDxfIHQ1D63zoYW+2lzHomkex2PmrA4
+    expiration-time : 86400000
+
