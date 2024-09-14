@@ -41,7 +41,6 @@ public class JwtService {
         return extractSingleClaim(token,Claims::getSubject);
     }
 
-    @org.jetbrains.annotations.NotNull
     private Key getJwtKey(){
         byte[] keyBytes =Decoders.BASE64.decode(env.getProperty("security.jwt.secret-key"));
         return Keys.hmacShaKeyFor(keyBytes);

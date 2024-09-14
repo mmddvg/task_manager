@@ -11,7 +11,6 @@ public record NewUser(
         @Email
         String email,
         @NotEmpty
-        @Min(value = 8)
         String password
 ) {
 

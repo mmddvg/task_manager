@@ -35,6 +35,10 @@ public class User implements UserDetails {
     @ManyToMany(mappedBy = "members")
     private Set<Team> teams;
 
+    public User(){
+
+    }
+
     public User(NewUser tmp,String password){
         this.name = tmp.name();
         this.email = tmp.email();

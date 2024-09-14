@@ -3,10 +3,10 @@ package com.mmddvg.taskmanager.dto;
 import com.mmddvg.taskmanager.models.User;
 
 public class SignupOutput{
-    Integer id;
-    String name;
-    String email;
-    String token;
+    public Integer id;
+    public String name;
+    public String email;
+    public String token;
 
     public SignupOutput(User user, String token) {
         this.id = user.getId();

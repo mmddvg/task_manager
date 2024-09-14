@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
+    private static final String[] WHITE_LIST ={"/auth/**"};
 
     private final JwtAuthenticationFilter jwtAuthFiler;
     private final AuthenticationProvider authProvider;
@@ -28,9 +28,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
-                .csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(req -> {
-            req.requestMatchers("/signup","/login").permitAll().anyRequest().authenticated();
-        })
+                .csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(req -> req.requestMatchers(WHITE_LIST)
+                        .permitAll()
+                       .anyRequest()
+                        .authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authProvider)
                 .addFilterBefore(jwtAuthFiler, UsernamePasswordAuthenticationFilter.class);
