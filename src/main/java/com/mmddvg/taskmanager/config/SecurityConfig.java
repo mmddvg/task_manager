@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private static final String[] WHITE_LIST ={"/auth/**"};
+    private static final String[] WHITE_LIST ={"/auth/login","/auth/signup"};
 
     private final JwtAuthenticationFilter jwtAuthFiler;
     private final AuthenticationProvider authProvider;

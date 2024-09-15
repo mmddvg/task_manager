@@ -10,11 +10,12 @@ import java.util.List;
 
 @Service
 public class TaskService {
+    private final TaskRepo taskRepo;
+
     public TaskService(TaskRepo taskRepo) {
         this.taskRepo = taskRepo;
     }
 
-    TaskRepo taskRepo;
 
 
     public Task Create(NewTask arg){

@@ -41,16 +41,4 @@ public class TasksController {
         return taskService.GetOne(id);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleValidationError(MethodArgumentNotValidException arg){
-        var errors = new HashMap<String,String>();
-
-        arg.getBindingResult().getAllErrors().forEach(err -> {
-            var fieldName = ((FieldError) err).getField();
-            errors.put(fieldName,err.getDefaultMessage());
-        });
-
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
-    }
-
 }

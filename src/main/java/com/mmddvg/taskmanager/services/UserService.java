@@ -8,6 +8,7 @@ import com.mmddvg.taskmanager.models.User;
 import com.mmddvg.taskmanager.postgresRepo.UserRepo;
 import org.apache.coyote.BadRequestException;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,10 @@ public class UserService {
         String token = this.jwtService.generateJwt(new HashMap<>(),user);
 
         return new SignupOutput(user,token);
+    }
+
+    public User getUser(){
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        return userRepo.findByEmail(auth.getName()).orElse(null);
     }
 }

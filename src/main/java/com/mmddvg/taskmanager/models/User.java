@@ -1,6 +1,7 @@
 package com.mmddvg.taskmanager.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mmddvg.taskmanager.dto.NewUser;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class User implements UserDetails {
     private List<Team> OwnedTeams;
 
     @ManyToMany(mappedBy = "members")
+    @JsonBackReference
     private Set<Team> teams;
 
     public User(){
