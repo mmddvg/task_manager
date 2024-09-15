@@ -26,4 +26,9 @@ public class TeamsController {
     public Team addMember(@PathVariable("id") Integer teamId,@PathVariable("user_id") Integer userId){
         return this.teamService.addMember(teamId,userId);
     }
+
+    @DeleteMapping("{id}/remove/{user_id}")
+    public Team removeMember(@PathVariable("id") Integer teamId , @PathVariable("user_id") Integer userId){
+        return this.teamService.removeMember(teamId,userId);
+    }
 }

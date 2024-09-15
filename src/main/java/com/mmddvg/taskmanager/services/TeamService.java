@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @Service
 public class TeamService {
@@ -47,6 +48,22 @@ public class TeamService {
 
         User newMember = userRepo.findById(userId).orElseThrow(() -> new NotFoundException("user",userId.longValue()));
         team.getMembers().add(newMember);
+
+        return teamRepo.save(team);
+    }
+
+    public Team removeMember(Integer teamId , Integer userId){
+        Team team = teamRepo.findById(teamId).orElseThrow(() -> new NotFoundException("team",teamId.longValue()));
+
+        var userDetails = SecurityContextHolder.getContext().getAuthentication();
+        User ownerUser = userRepo.findByEmail(userDetails.getName()).orElseThrow(() -> new NotFoundException("user",userDetails.getName()));
+
+        if (!team.canEdit(ownerUser)){
+            throw new NotAuthorizedExecption("not authorized to remove members from this team");
+        }
+
+        User member = userRepo.findById(userId).orElseThrow(() -> new NotFoundException("user",userId.longValue()));
+        team.getMembers().remove(member);
 
         return teamRepo.save(team);
     }
