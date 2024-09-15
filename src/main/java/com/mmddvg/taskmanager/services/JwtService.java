@@ -23,7 +23,7 @@ public class JwtService {
     }
 
     public boolean isValid(String token){
-        return extractSingleClaim(token,Claims::getExpiration).before(new Date());
+        return extractSingleClaim(token,Claims::getExpiration).after(new Date());
     }
 
     public String generateJwt(Map<String ,Object> extraClaims, UserDetails userDetails){

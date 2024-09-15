@@ -37,7 +37,6 @@ public class UserService {
 
     public SignupOutput logIn(LoginRequest arg)throws Exception{
         User user = userRepo.findByEmail(arg.email()).orElseThrow(() -> new UsernameNotFoundException("user not found"));
-        System.out.println("user found");
         boolean match = passwordEncoder.matches(arg.password(), user.getPassword());
         if (!match){
             throw new BadRequestException("wrong credentials");
