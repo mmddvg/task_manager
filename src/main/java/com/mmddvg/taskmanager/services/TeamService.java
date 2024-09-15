@@ -2,6 +2,7 @@ package com.mmddvg.taskmanager.services;
 
 
 import com.mmddvg.taskmanager.dto.NewTeam;
+import com.mmddvg.taskmanager.dto.TeamOutput;
 import com.mmddvg.taskmanager.exceptions.NotAuthorizedExecption;
 import com.mmddvg.taskmanager.exceptions.NotFoundException;
 import com.mmddvg.taskmanager.models.Team;
@@ -36,7 +37,7 @@ public class TeamService {
         return teamRepo.save(team);
     }
 
-    public Team addMember(Integer teamId, Integer userId){
+    public TeamOutput addMember(Integer teamId, Integer userId){
         Team team = teamRepo.findById(teamId).orElseThrow(() -> new NotFoundException("team",teamId.longValue()));
 
         var userDetails = SecurityContextHolder.getContext().getAuthentication();
@@ -49,10 +50,14 @@ public class TeamService {
         User newMember = userRepo.findById(userId).orElseThrow(() -> new NotFoundException("user",userId.longValue()));
         team.getMembers().add(newMember);
 
-        return teamRepo.save(team);
+        team = teamRepo.save(team);
+
+
+
+        return new TeamOutput(team);
     }
 
-    public Team removeMember(Integer teamId , Integer userId){
+    public TeamOutput removeMember(Integer teamId , Integer userId){
         Team team = teamRepo.findById(teamId).orElseThrow(() -> new NotFoundException("team",teamId.longValue()));
 
         var userDetails = SecurityContextHolder.getContext().getAuthentication();
@@ -65,6 +70,6 @@ public class TeamService {
         User member = userRepo.findById(userId).orElseThrow(() -> new NotFoundException("user",userId.longValue()));
         team.getMembers().remove(member);
 
-        return teamRepo.save(team);
+        return new TeamOutput(teamRepo.save(team));
     }
 }

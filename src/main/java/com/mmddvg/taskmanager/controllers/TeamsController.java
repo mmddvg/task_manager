@@ -2,6 +2,7 @@ package com.mmddvg.taskmanager.controllers;
 
 
 import com.mmddvg.taskmanager.dto.NewTeam;
+import com.mmddvg.taskmanager.dto.TeamOutput;
 import com.mmddvg.taskmanager.models.Team;
 import com.mmddvg.taskmanager.services.TeamService;
 import jakarta.validation.Valid;
@@ -23,12 +24,12 @@ public class TeamsController {
 
 
     @PatchMapping("{id}/add/{user_id}")
-    public Team addMember(@PathVariable("id") Integer teamId,@PathVariable("user_id") Integer userId){
+    public TeamOutput addMember(@PathVariable("id") Integer teamId, @PathVariable("user_id") Integer userId){
         return this.teamService.addMember(teamId,userId);
     }
 
     @DeleteMapping("{id}/remove/{user_id}")
-    public Team removeMember(@PathVariable("id") Integer teamId , @PathVariable("user_id") Integer userId){
+    public TeamOutput removeMember(@PathVariable("id") Integer teamId , @PathVariable("user_id") Integer userId){
         return this.teamService.removeMember(teamId,userId);
     }
 }
