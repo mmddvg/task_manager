@@ -5,10 +5,10 @@ import com.mmddvg.taskmanager.models.User;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TeamOutputTest {
@@ -57,7 +57,7 @@ class TeamOutputTest {
         mem2.setName("efi");
         mem2.setEmail("efi@example.com");
 
-        Set<User> members = new HashSet<User>();
+        List<User> members = new ArrayList<User>();
         members.add(mem1);
         members.add(mem2);
 

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class Team {
     )
     @Fetch(FetchMode.SUBSELECT)
     @JsonManagedReference
-    private Set<User> members;
+    private List<User> members;
 
     @OneToMany(mappedBy = "team",cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -52,11 +53,11 @@ public class Team {
     }
 
 
-    public Set<User> getMembers() {
+    public List<User> getMembers() {
         return members;
     }
 
-    public void setMembers(Set<User> members) {
+    public void setMembers(List<User> members) {
         this.members = members;
     }
 
