@@ -8,6 +8,8 @@ import com.mmddvg.taskmanager.services.TeamService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/teams")
 public class TeamsController {
@@ -31,5 +33,10 @@ public class TeamsController {
     @DeleteMapping("{id}/remove/{user_id}")
     public TeamOutput removeMember(@PathVariable("id") Integer teamId , @PathVariable("user_id") Integer userId){
         return this.teamService.removeMember(teamId,userId);
+    }
+
+    @GetMapping
+    public List<TeamOutput> getAll(){
+        return this.teamService.getAll();
     }
 }

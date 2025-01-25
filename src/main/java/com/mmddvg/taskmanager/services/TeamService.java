@@ -11,10 +11,10 @@ import com.mmddvg.taskmanager.postgresRepo.TeamRepo;
 import com.mmddvg.taskmanager.postgresRepo.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
+import java.util.List;
 
 @Service
 public class TeamService {
@@ -71,5 +71,13 @@ public class TeamService {
         team.getMembers().remove(member);
 
         return new TeamOutput(teamRepo.save(team));
+    }
+
+    public List<TeamOutput> getAll(){
+        var userDetails = SecurityContextHolder.getContext().getAuthentication();
+
+        var user = userRepo.findByEmail(userDetails.getName()).orElseThrow(() -> new NotFoundException("user",userDetails.getName()));
+
+        return teamRepo.findByUser(user).stream().map(TeamOutput::new).toList();
     }
 }

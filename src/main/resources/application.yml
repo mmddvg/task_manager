@@ -1,4 +1,7 @@
 spring :
+  date :
+    rest :
+      enabled : false
   application :
     name : taskmanager
 
