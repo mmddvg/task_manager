@@ -5,13 +5,18 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mmddvg.taskmanager.dto.NewTask;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "tasks",indexes = {
         @Index(name = "idx_project_team", columnList = "project_id")
 })
+@NoArgsConstructor
 public class Task {
 
     @Id
@@ -20,7 +25,6 @@ public class Task {
 
     @Column(length = 20,nullable = false)
     private String name;
-
 
     @Column
     private String description;
@@ -32,10 +36,7 @@ public class Task {
 
     @OneToMany(mappedBy = "task",cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<SubTask> subtasks;
-
-    public Task() {
-    }
+    private List<SubTask> subtasks;
 
     public Task(NewTask arg){
         this.name = arg.name();
@@ -44,49 +45,5 @@ public class Task {
         tmp.setId(arg.project_id());
         this.project = tmp;
     }
-    public Set<SubTask> getSubtasks() {
-        return subtasks;
-    }
-
-    public void setSubtasks(Set<SubTask> subtasks) {
-        this.subtasks = subtasks;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
 
 }
